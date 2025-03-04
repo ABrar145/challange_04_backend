@@ -1,10 +1,20 @@
-import app from "./app";
-import { Server } from "http";
+import express from "express";
+import { authenticateUser } from "./middleware/authentication";
+import { authorizeRole } from "./middleware/authorization";
 
-const PORT: string | number = process.env.PORT || 3000;
+const app = express();
+app.use(express.json());
 
-const server: Server = app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}`);
+// Profile Endpoint (accessible by authenticated users)
+app.get("/profile", authenticateUser, (req, res) => {
+    res.json({ message: "User Profile", user: res.locals.user });
 });
 
-export default server;
+// User Data Endpoint (accessible by admins only)
+app.get("/users/:id", authenticateUser, authorizeRole("admin"), (req, res) => {
+    res.json({ message: `User details for ${req.params.id}` });
+});
+
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
