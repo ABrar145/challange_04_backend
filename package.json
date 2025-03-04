@@ -1,0 +1,25 @@
+{
+	"name": "admin-permissions-api",
+	"version": "1.0.0",
+	"description": "A basic API for administering user authentication and permissions with Firebase Authentication",
+	"main": "dist/server.js",
+	"scripts": {
+		"start": "ts-node src/server.ts",
+		"build": "tsc"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.7",
+		"express": "^4.21.2",
+		"firebase-admin": "^13.1.0"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.21",
+		"@types/node": "^20.17.23",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.8.2"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
